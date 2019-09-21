@@ -6,16 +6,18 @@ import {
   Button,
   View,
   FlatList,
-  Alert,
+  Alert
 } from "react-native";
 import GoalItem from "./components/GoalItem";
-import GoalInput from "./components/GoalInput"
+import GoalInput from "./components/GoalInput";
 
 export default function App() {
-  const [courseGoals, setCourseGoals] = useState(["a", "b"]);
+  const [courseGoals, setCourseGoals] = useState([]);
+  const [isAddMode, setIsAddMode] = useState(false);
 
-  const addGoalHandler = (enteredGoal) => {
+  const addGoalHandler = enteredGoal => {
     setCourseGoals(currentGoals => [...currentGoals, enteredGoal]);
+    setIsAddMode(false);
   };
 
   const removeGoalHandler = index => {
@@ -44,7 +46,12 @@ export default function App() {
 
   return (
     <View style={styles.screen}>
-      <GoalInput onAddGoal={addGoalHandler}/>
+      <Button title="Add Goals" onPress={() => setIsAddMode(true)}></Button>
+      <GoalInput
+        setIsAddMode={setIsAddMode}
+        visible={isAddMode}
+        onAddGoal={addGoalHandler}
+      />
       <FlatList
         keyExtractor={(item, index) => index.toString()}
         data={courseGoals}
@@ -59,5 +66,5 @@ export default function App() {
 const styles = StyleSheet.create({
   screen: {
     padding: 50
-  },
+  }
 });

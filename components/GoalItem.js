@@ -16,11 +16,7 @@ const GoalItem = props => {
   return (
     <TouchableOpacity onPress={getListViewItem.bind(this, props.itemData)}>
       <View style={styles.listContainer}>
-        <Text
-          style={styles.goal}
-        >
-          {props.itemData.item}
-        </Text>
+        <Text style={styles.goal}>{props.itemData.item}</Text>
         <Button
           color="red"
           title="-"
