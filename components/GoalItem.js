@@ -1,5 +1,12 @@
 import React from "react";
-import { StyleSheet, Text, Button, View, Alert } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  Button,
+  View,
+  Alert,
+  TouchableOpacity
+} from "react-native";
 
 const GoalItem = props => {
   const getListViewItem = itemData => {
@@ -7,16 +14,20 @@ const GoalItem = props => {
   };
 
   return (
-    <View style={styles.listContainer}>
-      <Text style={styles.goal} onPress={() => getListViewItem(props.itemData)}>
-        {props.itemData.item}
-      </Text>
-      <Button
-        color="red"
-        title="-"
-        onPress={() => props.onRemove(props.itemData.index)}
-      />
-    </View>
+    <TouchableOpacity onPress={getListViewItem.bind(this, props.itemData)}>
+      <View style={styles.listContainer}>
+        <Text
+          style={styles.goal}
+        >
+          {props.itemData.item}
+        </Text>
+        <Button
+          color="red"
+          title="-"
+          onPress={() => props.onRemove(props.itemData.index)}
+        />
+      </View>
+    </TouchableOpacity>
   );
 };
 
